@@ -1,7 +1,10 @@
 import app from './app.js';
 
-const PORT = process.env.PORT || 8080;
+const DEFAULT_PORT = 3009;
+const PORT = Number(process.env.PORT) || DEFAULT_PORT;
 
-app.listen(PORT, () => {
-    console.log(`Listening on http://localhost:${PORT}`);
+const server = app.listen(PORT, () => {
+  console.log(`Server listening on http://localhost:${PORT}`);
 });
+
+export default server;
