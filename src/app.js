@@ -4,7 +4,8 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import authRoutes from './routes/auth.routes.js';
+import authRoutes from '#routes/auth.routes.js';
+import securityMiddleware from '#middleware/security.middleware.js';
 
 const app = express();
 app.use(helmet()); // this secure Express apps with various HTTP headers
@@ -18,6 +19,8 @@ app.use(cookieParser());
 
 app.use(morgan('combined', { stream: { write: (message) => logger.info(message.trim()) } }));
 // morgain is an HTTP request logger middleware for node.js.
+
+app.use(securityMiddleware);
 
 
 app.get('/', (req, res) => {
