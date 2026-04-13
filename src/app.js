@@ -6,6 +6,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import authRoutes from '#routes/auth.routes.js';
 import securityMiddleware from '#middleware/security.middleware.js';
+import { use } from 'react';
 
 const app = express();
 app.use(helmet()); // this secure Express apps with various HTTP headers
@@ -45,5 +46,10 @@ app.get('/api', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes)
+app.use('/api/users', userRoutes);
+
+app.use((req, res) => {
+    res.status(404).json({ error : 'ROUTE NOT FOUND'})
+})
 
 export default app;

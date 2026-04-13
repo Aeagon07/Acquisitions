@@ -1,0 +1,83 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+  pull_request:
+    branches:
+      - main
+      - staging
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: test
+      NODE_OPTIONS: --experimental-vm-modules
+      DATABASE_URL: postgres://test:test@localhost:5432/testdb
+      ARCJET_KEY: test-key
+      JWT_SECRET: test-secret
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        id: test
+        continue-on-error: true
+        run: npm test
+
+      - name: Upload coverage artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: Publish test summary
+        if: always()
+        shell: bash
+        run: |
+          echo "## Test results" >> "$GITHUB_STEP_SUMMARY"
+          echo >> "$GITHUB_STEP_SUMMARY"
+          echo "- Status: ${{ steps.test.outcome }}" >> "$GITHUB_STEP_SUMMARY"
+
+          if [ -f coverage/lcov-report/index.html ]; then
+            echo "- HTML coverage report: generated" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "- HTML coverage report: not generated" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+          if [ -f coverage/lcov.info ]; then
+            echo "- LCOV report: generated" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "- LCOV report: not generated" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+          if [ -f coverage/coverage-summary.json ]; then
+            node -e "const fs=require('fs'); const data=JSON.parse(fs.readFileSync('coverage/coverage-summary.json','utf8')); const total=data.total || {}; const entries=['lines','statements','functions','branches'].filter((key)=>total[key]).map((key)=>\`- ${key}: ${total[key].pct}%\`); fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '\n### Coverage totals\n' + entries.join('\n') + '\n');"
+          else
+            echo "- Coverage summary JSON: not generated" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Fail on test errors
+        if: always()
+        shell: bash
+        run: |
+          if [ "${{ steps.test.outcome }}" = "failure" ]; then
+            echo "::error title=Tests failed::Tests failed. Run npm test locally."
+            exit 1
+          fi

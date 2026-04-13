@@ -1,8 +1,12 @@
 import jwt from 'jsonwebtoken';
 import logger from '#config/logger.js';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
+const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRES_IN = '1h'; // Token expires in 1 hour
+
+if (!JWT_SECRET) {
+    throw new Error('JWT_SECRET is required');
+}
 
 export const jwttoken = {
     sign: (payload) => {
