@@ -10,7 +10,7 @@ export const hashPassword = async password => {
     // 10 => it is number of rounds for hashing the password!
   } catch (e) {
     logger.error(`Error Hashing Password: ${e}`);
-    throw new Error('Invalid Password !');
+    throw new Error('Invalid Password !', { cause: e });
   }
 };
 
@@ -40,7 +40,7 @@ export const comparePassword = async (password, hashedPassword) => {
     return await bcrypt.compare(password, hashedPassword);
   } catch (e) {
     logger.error(`Error Comparing Password: ${e}`);
-    throw new Error('Invalid Password !');
+    throw new Error('Invalid Password !', { cause: e });
   }
 };
 

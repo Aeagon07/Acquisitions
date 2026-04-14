@@ -7,7 +7,7 @@ if (!databaseUrl) {
   throw new Error('DATABASE_URL is required');
 }
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NEON_LOCAL === 'true') {
   const neonLocalHost = process.env.NEON_LOCAL_HOST || 'neon-local';
   const neonLocalPort = process.env.NEON_LOCAL_PORT || '5432';
 

@@ -14,7 +14,7 @@ export const jwttoken = {
       return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
     } catch (error) {
       logger.error('Failed to Authenticate User', error);
-      throw new Error('Failed to Authenticate User');
+      throw new Error('Failed to Authenticate User', { cause: error });
     }
   },
 
@@ -23,7 +23,7 @@ export const jwttoken = {
       return jwt.verify(token, JWT_SECRET);
     } catch (e) {
       logger.error('Failed to Authenticate User', e);
-      throw new Error('Failed to Authenticate User');
+      throw new Error('Failed to Authenticate User', { cause: e });
     }
   },
 };

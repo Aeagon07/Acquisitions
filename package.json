@@ -12,7 +12,8 @@
     "#routes/*": "./src/routes/*",
     "#services/*": "./src/services/*",
     "#utils/*": "./src/utils/*",
-    "#validation/*": "./src/validation/*"
+    "#validation/*": "./src/validation/*",
+    "#validations/*": "./src/validations/*"
   },
   "scripts": {
     "dev": "node --watch src/index.js",
@@ -29,7 +30,7 @@
     "dev:docker:logs": "docker compose -f docker-compose.dev.yml --env-file .env.development logs -f",
     "dev:docker:down": "docker compose -f docker-compose.dev.yml --env-file .env.development down",
     "prod:docker": "sh ./scripts/prod.sh",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand"
   },
   "repository": {
     "type": "git",
