@@ -85,3 +85,13 @@
 {"level":"info","message":"::ffff:127.0.0.1 - - [14/Apr/2026:05:51:59 +0000] \"GET /health HTTP/1.1\" 200 72 \"-\" \"-\"","service":"acquisitions-api"}
 {"level":"info","message":"::ffff:127.0.0.1 - - [14/Apr/2026:05:51:59 +0000] \"GET /api HTTP/1.1\" 200 42 \"-\" \"-\"","service":"acquisitions-api"}
 {"level":"info","message":"::ffff:127.0.0.1 - - [14/Apr/2026:05:51:59 +0000] \"GET /nonexsistent HTTP/1.1\" 404 27 \"-\" \"-\"","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [14/Apr/2026:06:33:14 +0000] \"GET /health HTTP/1.1\" 200 75 \"-\" \"-\"","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [14/Apr/2026:06:33:44 +0000] \"GET /health HTTP/1.1\" 200 76 \"-\" \"-\"","service":"acquisitions-api"}
+{"level":"info","message":"Hello From Acquisitions API","service":"acquisitions-api"}
+{"level":"info","message":"::ffff:172.18.0.1 - - [14/Apr/2026:06:33:47 +0000] \"GET / HTTP/1.1\" 200 41 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36\"","service":"acquisitions-api"}
+{"level":"info","message":"::ffff:172.18.0.1 - - [14/Apr/2026:06:33:47 +0000] \"GET /favicon.ico HTTP/1.1\" 404 27 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36\"","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [14/Apr/2026:06:34:14 +0000] \"GET /health HTTP/1.1\" 200 76 \"-\" \"-\"","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [14/Apr/2026:06:34:45 +0000] \"GET /health HTTP/1.1\" 200 76 \"-\" \"-\"","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [14/Apr/2026:06:35:15 +0000] \"GET /health HTTP/1.1\" 200 77 \"-\" \"-\"","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [14/Apr/2026:06:35:45 +0000] \"GET /health HTTP/1.1\" 200 77 \"-\" \"-\"","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [14/Apr/2026:06:36:15 +0000] \"GET /health HTTP/1.1\" 200 77 \"-\" \"-\"","service":"acquisitions-api"}
