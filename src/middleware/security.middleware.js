@@ -8,6 +8,12 @@ const securityMiddleware = async (req, res, next) => {
       return next();
     }
 
+    // Allow health probes to bypass Arcjet checks because they often omit headers
+    // like User-Agent and should remain as lightweight as possible.
+    if (req.path === '/health') {
+      return next();
+    }
+
     const role = req.user?.role || 'guest';
 
     let limit;
