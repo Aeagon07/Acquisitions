@@ -5,9 +5,10 @@ This project is dockerized with two separate runtime modes:
 - Development: app + Neon Local proxy in Docker Compose (ephemeral Neon branches)
 - Production: app container connects directly to Neon Cloud using `DATABASE_URL`
 
+## Public Docker Hub repo
 
-## Public Docker Hub repo 
 - docker push rushikesh27052005/acquisitions:tagname
+
 ## Files added
 
 - `Dockerfile`
